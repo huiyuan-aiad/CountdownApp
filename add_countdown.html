@@ -179,8 +179,65 @@
 <script src="language-switcher.js"></script>
 <script src="icon-fallback.js"></script>
 <script src="navigation.js"></script>
+<script src="countdown-storage.js"></script>
 <script src="debug.js"></script>
 <script>
+    // 初始化分类选择功能
+    function initCategorySelection() {
+        const categoryChips = document.querySelectorAll('.category-chip');
+        console.log(`找到${categoryChips.length}个分类选项`);
+        
+        categoryChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                // 移除所有分类的active类
+                categoryChips.forEach(c => {
+                    c.classList.remove('active');
+                    c.classList.remove('bg-indigo-600', 'text-white');
+                    if (!c.classList.contains('bg-white')) {
+                        c.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
+                    }
+                });
+                
+                // 为当前点击的分类添加active类
+                this.classList.add('active');
+                this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
+                this.classList.add('bg-indigo-600', 'text-white');
+                
+                console.log(`选择了分类: ${this.textContent.trim()}`);
+            });
+        });
+    }
+    
+    // 初始化颜色选择功能
+    function initColorSelection() {
+        const colorButtons = document.querySelectorAll('.glass-effect.rounded-xl.p-4 .rounded-full');
+        console.log(`找到${colorButtons.length}个颜色选项`);
+        
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 移除所有颜色的选中状态
+                colorButtons.forEach(b => {
+                    b.classList.remove('ring-2', 'ring-offset-2');
+                });
+                
+                // 为当前点击的颜色添加选中状态
+                this.classList.add('ring-2', 'ring-offset-2');
+                
+                // 获取颜色类名
+                const classList = this.classList;
+                let colorClass = '';
+                for (let i = 0; i < classList.length; i++) {
+                    if (classList[i].startsWith('bg-') && classList[i] !== 'bg-white' && classList[i] !== 'bg-gray-100') {
+                        colorClass = classList[i];
+                        break;
+                    }
+                }
+                
+                console.log(`选择了颜色: ${colorClass}`);
+            });
+        });
+    }
+    
     // 页面加载完成后初始化语言功能和导航功能
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM加载完成，初始化功能');
@@ -224,6 +281,15 @@
                 }
             });
         });
+        
+        // 初始化分类选择功能
+        initCategorySelection();
+        
+        // 初始化颜色选择功能
+        initColorSelection();
+        
+        // 初始化保存按钮功能
+        initSaveButton();
     });
     
     // 确保所有脚本加载完成
@@ -234,7 +300,199 @@
         } else {
             console.error('initLanguage函数未定义，请检查language-switcher.js是否正确加载');
         }
+        
+        // 确保保存按钮功能已初始化
+        if (typeof initSaveButton === 'function') {
+            initSaveButton();
+        }
     });
+    
+    // 初始化保存按钮功能
+    function initSaveButton() {
+        const saveButton = document.querySelector('.glass-effect button.bg-indigo-600');
+        if (saveButton) {
+            console.log('找到保存按钮，添加点击事件');
+            saveButton.addEventListener('click', handleSaveCountdown);
+        } else {
+            console.error('未找到保存按钮');
+        }
+    }
+    
+    // 处理保存倒数日
+    function handleSaveCountdown() {
+        console.log('保存按钮被点击');
+        
+        // 收集表单数据
+        const title = document.getElementById('title').value.trim();
+        const dateInput = document.querySelector('input[type="date"]').value;
+        const notes = document.getElementById('notes').value.trim();
+        
+        // 获取选中的分类
+        let category = '其他';
+        const activeCategory = document.querySelector('.category-chip.active');
+        if (activeCategory) {
+            category = activeCategory.textContent.trim();
+        }
+        
+        // 获取选中的颜色
+        let color = 'indigo-500';
+        const activeColor = document.querySelector('.rounded-full.ring-2');
+        if (activeColor) {
+            // 从类名中提取颜色
+            const classList = activeColor.classList;
+            for (let i = 0; i < classList.length; i++) {
+                if (classList[i].startsWith('bg-') && classList[i] !== 'bg-white' && classList[i] !== 'bg-gray-100') {
+                    color = classList[i].replace('bg-', '');
+                    break;
+                }
+            }
+        }
+        
+        // 获取提醒设置
+        const reminderEnabled = document.querySelector('input[type="checkbox"]').checked;
+        
+        // 创建倒数日对象
+        const countdown = {
+            title: title,
+            date: dateInput,
+            category: category,
+            color: color,
+            notes: notes,
+            reminder: reminderEnabled
+        };
+        
+        // 验证数据
+        const validation = validateCountdown(countdown);
+        
+        if (!validation.isValid) {
+            // 显示错误信息
+            showValidationErrors(validation.errors);
+            return;
+        }
+        
+        try {
+            // 保存倒数日
+            const savedCountdown = addCountdown(countdown);
+            console.log('倒数日保存成功:', savedCountdown);
+            
+            // 显示成功提示
+            showSuccessMessage('倒数日添加成功！');
+            
+            // 延迟后返回首页
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        } catch (error) {
+            console.error('保存倒数日时出错:', error);
+            showErrorMessage('保存失败，请重试');
+        }
+    }
+    
+    // 显示验证错误
+    function showValidationErrors(errors) {
+        // 清除之前的错误提示
+        clearValidationErrors();
+        
+        // 显示新的错误提示
+        for (const field in errors) {
+            const inputElement = document.getElementById(field);
+            if (inputElement) {
+                inputElement.classList.add('border-red-500');
+                
+                // 创建错误提示元素
+                const errorElement = document.createElement('p');
+                errorElement.className = 'text-red-500 text-xs mt-1 validation-error';
+                errorElement.textContent = errors[field];
+                
+                // 插入到输入框后面
+                inputElement.parentNode.appendChild(errorElement);
+            } else if (field === 'date') {
+                // 日期字段特殊处理
+                const dateInput = document.querySelector('input[type="date"]');
+                if (dateInput) {
+                    dateInput.classList.add('border-red-500');
+                    
+                    const errorElement = document.createElement('p');
+                    errorElement.className = 'text-red-500 text-xs mt-1 validation-error';
+                    errorElement.textContent = errors[field];
+                    
+                    dateInput.parentNode.appendChild(errorElement);
+                }
+            } else if (field === 'category') {
+                // 分类字段特殊处理
+                const categoryContainer = document.querySelector('.category-chip').parentNode;
+                
+                const errorElement = document.createElement('p');
+                errorElement.className = 'text-red-500 text-xs mt-1 validation-error';
+                errorElement.textContent = errors[field];
+                
+                categoryContainer.appendChild(errorElement);
+            }
+        }
+    }
+    
+    // 清除验证错误
+    function clearValidationErrors() {
+        // 移除所有错误提示
+        const errorElements = document.querySelectorAll('.validation-error');
+        errorElements.forEach(element => element.remove());
+        
+        // 移除输入框的错误样式
+        document.getElementById('title')?.classList.remove('border-red-500');
+        document.querySelector('input[type="date"]')?.classList.remove('border-red-500');
+    }
+    
+    // 验证倒数日数据
+    function validateCountdown(countdown) {
+        const errors = {};
+        let isValid = true;
+        
+        // 验证标题
+        if (!countdown.title) {
+            errors.title = '请输入标题';
+            isValid = false;
+        }
+        
+        // 验证日期
+        if (!countdown.date) {
+            errors.date = '请选择日期';
+            isValid = false;
+        }
+        
+        return {
+            isValid: isValid,
+            errors: errors
+        };
+    }
+    
+    // 显示成功消息
+    function showSuccessMessage(message) {
+        showMessage(message, 'success');
+    }
+    
+    // 显示错误消息
+    function showErrorMessage(message) {
+        showMessage(message, 'error');
+    }
+    
+    // 显示消息
+    function showMessage(message, type) {
+        // 创建消息元素
+        const messageElement = document.createElement('div');
+        messageElement.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg z-50 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white font-medium shadow-lg`;
+        messageElement.textContent = message;
+        
+        // 添加到页面
+        document.body.appendChild(messageElement);
+        
+        // 设置自动消失
+        setTimeout(() => {
+            messageElement.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+            setTimeout(() => {
+                document.body.removeChild(messageElement);
+            }, 500);
+        }, 3000);
+    }
 </script>
 </body>
 </html>
