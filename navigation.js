@@ -7,21 +7,28 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Navigation.js: DOM加载完成，初始化导航功能');
     // 获取所有导航按钮
     const navButtons = document.querySelectorAll('button');
+    console.log(`Navigation.js: 找到${navButtons.length}个按钮`);
     
     // 为所有按钮添加点击事件监听器
-    navButtons.forEach(function(button) {
+    navButtons.forEach(function(button, index) {
+        // 为每个按钮添加一个唯一的调试ID
+        button.setAttribute('data-nav-id', `nav-btn-${index}`);
+        console.log(`Navigation.js: 为按钮[${index}]添加点击事件监听器`);
         button.addEventListener('click', function(event) {
             // 获取按钮内部的图片元素和文本内容
             const imgElement = button.querySelector('img');
             const buttonText = button.textContent.trim();
             
+            console.log(`Navigation.js: 按钮[${index}]被点击，文本内容: "${buttonText}"`);
+            
             // 根据按钮内容或图片alt属性确定操作
             if (imgElement) {
                 const imgAlt = imgElement.alt;
+                console.log(`Navigation.js: 按钮[${index}]包含图片，alt属性: "${imgAlt}"`);
                 
                 // 处理返回按钮
                 if (imgAlt === '返回' || imgAlt.includes('back')) {
-                    console.log('返回按钮被点击');
+                    console.log('Navigation.js: 返回按钮被点击');
                     // 使用直接跳转到index.html替代window.history.back()
                     // 因为在直接打开文件时，history.back()可能没有历史记录可返回
                     window.location.href = 'index.html';
@@ -32,28 +39,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 处理底部导航栏按钮
                 if (imgAlt === '首页' || imgAlt === '首頁' || imgAlt.includes('home')) {
+                    console.log('Navigation.js: 首页按钮被点击，跳转到index.html');
                     window.location.href = 'index.html';
                     return;
                 }
                 
                 if (imgAlt === '日历' || imgAlt === '日曆' || imgAlt.includes('calendar')) {
+                    console.log('Navigation.js: 日历按钮被点击');
                     // 实现日历功能 - 显示日历视图
                     showCalendarView();
                     return;
                 }
                 
                 if (imgAlt === '添加' || imgAlt.includes('add') || imgAlt.includes('plus')) {
+                    console.log('Navigation.js: 添加按钮被点击，跳转到add_countdown.html');
                     window.location.href = 'add_countdown.html';
                     return;
                 }
                 
                 if (imgAlt === '提醒' || imgAlt.includes('reminder') || imgAlt.includes('bell')) {
+                    console.log('Navigation.js: 提醒按钮被点击');
                     // 实现提醒功能 - 显示提醒列表
                     showRemindersList();
                     return;
                 }
                 
                 if (imgAlt === '我的' || imgAlt.includes('my') || imgAlt.includes('user')) {
+                    console.log('Navigation.js: 我的按钮被点击');
                     // 实现个人中心功能 - 显示用户信息
                     showUserProfile();
                     return;
