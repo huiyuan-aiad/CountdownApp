@@ -175,6 +175,28 @@
             </div>
         </div>
     </div>
-</body>
+<script src="languages.js"></script>
+<script src="language-switcher.js"></script>
 <script src="icon-fallback.js"></script>
+<script src="navigation.js"></script>
+<script>
+    // 页面加载完成后初始化语言功能和导航功能
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM加载完成，初始化功能');
+        if (typeof initLanguage === 'function') {
+            initLanguage();
+        }
+    });
+    
+    // 确保所有脚本加载完成
+    window.addEventListener('load', function() {
+        console.log('页面完全加载完成，确保所有功能初始化');
+        if (typeof initLanguage === 'function') {
+            initLanguage();
+        } else {
+            console.error('initLanguage函数未定义，请检查language-switcher.js是否正确加载');
+        }
+    });
+</script>
+</body>
 </html>
