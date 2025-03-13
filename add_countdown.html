@@ -179,6 +179,7 @@
 <script src="language-switcher.js"></script>
 <script src="icon-fallback.js"></script>
 <script src="navigation.js"></script>
+<script src="debug.js"></script>
 <script>
     // 页面加载完成后初始化语言功能和导航功能
     document.addEventListener('DOMContentLoaded', function() {
@@ -186,6 +187,43 @@
         if (typeof initLanguage === 'function') {
             initLanguage();
         }
+        
+        // 检查navigation.js是否已加载
+        console.log('检查导航脚本是否已加载');
+        const scripts = document.querySelectorAll('script');
+        let navigationLoaded = false;
+        
+        scripts.forEach(script => {
+            if (script.src.includes('navigation.js')) {
+                navigationLoaded = true;
+                console.log('navigation.js已加载');
+            }
+        });
+        
+        if (!navigationLoaded) {
+            console.error('navigation.js未加载，可能导致导航功能失效');
+        }
+        
+        // 检查底部导航按钮
+        const bottomNavButtons = document.querySelectorAll('.glass-effect.rounded-xl.p-3.mt-4 button');
+        console.log(`找到${bottomNavButtons.length}个底部导航按钮`);
+        
+        // 为底部导航按钮添加额外的点击事件监听器（作为备份）
+        bottomNavButtons.forEach((button, index) => {
+            console.log(`为底部导航按钮[${index}]添加备份点击事件`);
+            button.addEventListener('click', function(event) {
+                const imgElement = this.querySelector('img');
+                if (imgElement) {
+                    const imgAlt = imgElement.alt;
+                    console.log(`底部导航按钮[${index}]被点击，alt属性: "${imgAlt}"`);
+                    
+                    if (imgAlt === '首页' || imgAlt.includes('home')) {
+                        console.log('首页按钮被点击，跳转到index.html');
+                        window.location.href = 'index.html';
+                    }
+                }
+            });
+        });
     });
     
     // 确保所有脚本加载完成
