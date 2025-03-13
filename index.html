@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒数日 - 首页</title>
+    <link rel="stylesheet" href="tailwind.min.css">
+    <link rel="stylesheet" href="icons.css">
+    <link rel="stylesheet" href="festival.css">
+    <link rel="stylesheet" href="title-styles.css">
+    <link rel="stylesheet" href="image-overlay.css">
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        .mockup-frame {
+            border: 2px dashed #e2e8f0;
+            border-radius: 2rem;
+            padding: 1rem;
+            margin: 1rem;
+            width: 360px;
+            height: 720px;
+            overflow: hidden;
+            position: relative;
+        }
+        .countdown-card {
+            transition: all 0.3s ease;
+        }
+        .countdown-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+    <div class="container mx-auto p-4 flex flex-wrap justify-center">
+        <!-- 首页 - 倒数日列表 -->
+        <div class="mockup-frame bg-gray-50">
+            <div class="h-full flex flex-col">
+                <!-- 顶部导航栏 -->
+                <div class="glass-effect rounded-xl p-4 flex justify-between items-center mb-4">
+                    <h1 class="text-xl font-bold text-indigo-900">我的倒数日</h1>
+                    <div class="flex space-x-2">
+                        <button class="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200">
+                            <img src="./icons/search.svg" class="w-5 h-5 icon-with-fallback" alt="搜索">
+                        </button>
+                        <button class="p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200">
+                            <img src="./icons/settings.svg" class="w-5 h-5 icon-with-fallback" alt="设置">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 分类标签 -->
+                <div class="flex space-x-2 mb-4 overflow-x-auto py-2 no-scrollbar">
+                    <button class="px-4 py-2 rounded-full bg-indigo-600 text-white font-medium text-sm whitespace-nowrap">全部</button>
+                    <button class="px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap">学习</button>
+                    <button class="px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap">工作</button>
+                    <button class="px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap">生活</button>
+                    <button class="px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap">节日</button>
+                </div>
+                
+                <!-- 倒数日卡片列表 -->
+                <div class="flex-1 overflow-y-auto space-y-4 pr-1">
+                    <!-- 卡片1 - 毕业典礼 -->
+                    <div class="countdown-card glass-effect rounded-xl p-4 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-pink-400 to-purple-500 rounded-bl-3xl opacity-20"></div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-800">毕业典礼</h3>
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded-lg text-xs font-medium">学习</span>
+                        </div>
+                        <div class="flex items-center space-x-1 text-gray-500 text-sm mb-3">
+                            <img src="./icons/calendar.svg" class="w-4 h-4 icon-with-fallback" alt="日期">
+                            <span>2024年6月15日</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-600 text-sm">距离还有</p>
+                                <p class="text-3xl font-bold text-indigo-600">125天</p>
+                            </div>
+                            <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+                                <img src="./icons/more-horizontal.svg" class="w-5 h-5 text-gray-600 icon-with-fallback" alt="更多">
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 卡片2 - 春节 -->
+                    <div class="countdown-card glass-effect rounded-xl p-4 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-red-400 to-orange-500 rounded-bl-3xl opacity-20"></div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-800">春节</h3>
+                            <span class="px-2 py-1 bg-red-100 text-red-600 rounded-lg text-xs font-medium">节日</span>
+                        </div>
+                        <div class="flex items-center space-x-1 text-gray-500 text-sm mb-3">
+                            <img src="./icons/calendar.svg" class="w-4 h-4 icon-with-fallback" alt="日期">
+                            <span>2025年1月29日</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-600 text-sm">距离还有</p>
+                                <p class="text-3xl font-bold text-red-600">353天</p>
+                            </div>
+                            <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+                                <img src="./icons/more-horizontal.svg" class="w-5 h-5 text-gray-600 icon-with-fallback" alt="更多">
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 卡片3 - 项目截止日期 -->
+                    <div class="countdown-card glass-effect rounded-xl p-4 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-bl-3xl opacity-20"></div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-800">项目截止日期</h3>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-lg text-xs font-medium">工作</span>
+                        </div>
+                        <div class="flex items-center space-x-1 text-gray-500 text-sm mb-3">
+                            <img src="./icons/calendar.svg" class="w-4 h-4 icon-with-fallback" alt="日期">
+                            <span>2024年3月1日</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-gray-600 text-sm">距离还有</p>
+                                <p class="text-3xl font-bold text-blue-600">18天</p>
+                            </div>
+                            <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
+                                <img src="./icons/more-horizontal.svg" class="w-5 h-5 text-gray-600 icon-with-fallback" alt="更多">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="glass-effect rounded-xl p-3 mt-4 flex justify-around items-center">
+                    <button class="flex flex-col items-center p-2 text-indigo-600">
+                        <img src="./icons/home.svg" class="w-6 h-6 icon-with-fallback" alt="首页">
+                        <span class="text-xs mt-1 font-medium">首页</span>
+                    </button>
+                    <button class="flex flex-col items-center p-2 text-gray-500 hover:text-indigo-600">
+                        <img src="./icons/calendar.svg" class="w-6 h-6 icon-with-fallback" alt="日历">
+                        <span class="text-xs mt-1">日历</span>
+                    </button>
+                    <div class="relative -mt-8">
+                        <button class="w-14 h-14 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                            <img src="./icons/plus.svg" class="w-8 h-8 text-white icon-with-fallback" alt="添加">
+                        </button>
+                    </div>
+                    <button class="flex flex-col items-center p-2 text-gray-500 hover:text-indigo-600">
+                        <img src="./icons/bell.svg" class="w-6 h-6 icon-with-fallback" alt="提醒">
+                        <span class="text-xs mt-1">提醒</span>
+                    </button>
+                    <button class="flex flex-col items-center p-2 text-gray-500 hover:text-indigo-600">
+                        <img src="./icons/user.svg" class="w-6 h-6 icon-with-fallback" alt="我的">
+                        <span class="text-xs mt-1">我的</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="icon-fallback.js"></script>
+</body>
+</html>

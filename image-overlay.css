@@ -1,0 +1,65 @@
+/* 图片叠加文本样式 */
+.countdown-card {
+    position: relative;
+}
+
+/* 背景图片半透明效果 */
+.countdown-card .bg-gradient-to-br {
+    opacity: 0.7; /* 设置半透明度 */
+    z-index: 0;
+}
+
+/* 确保卡片内容在图片上方 */
+.countdown-card > div:not(.absolute) {
+    position: relative;
+    z-index: 1;
+}
+
+/* 标题和标签样式增强 */
+.countdown-card h3,
+.countdown-card .text-lg.font-bold {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 分类标签样式增强 */
+.countdown-card span[class*="bg-"] {
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 节日类标题特殊样式 */
+.countdown-card:has(.bg-red-100) h3,
+.countdown-card:has(.text-red-600) h3 {
+    background-color: rgba(254, 226, 226, 0.8); /* 淡红色背景 */
+    color: #f43f5e;
+    font-weight: 700;
+}
+
+/* 学习类标题特殊样式 */
+.countdown-card:has(.bg-pink-100) h3,
+.countdown-card:has(.text-pink-600) h3 {
+    background-color: rgba(252, 231, 243, 0.8); /* 淡粉色背景 */
+    color: #db2777;
+    font-weight: 700;
+}
+
+/* 工作类标题特殊样式 */
+.countdown-card:has(.bg-blue-100) h3,
+.countdown-card:has(.text-blue-600) h3 {
+    background-color: rgba(219, 234, 254, 0.8); /* 淡蓝色背景 */
+    color: #2563eb;
+    font-weight: 700;
+}
+
+/* 生活类标题特殊样式 */
+.countdown-card:has(.bg-green-100) h3,
+.countdown-card:has(.text-green-600) h3 {
+    background-color: rgba(220, 252, 231, 0.8); /* 淡绿色背景 */
+    color: #16a34a;
+    font-weight: 700;
+}

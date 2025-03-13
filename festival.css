@@ -1,0 +1,37 @@
+/* 节日标题样式 */
+.festival-title {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f43f5e; /* 红色系，适合节日主题 */
+    text-align: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(254, 242, 242, 0.7); /* 淡红色背景，半透明 */
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 节日图标样式 */
+img.icon-with-fallback[alt="节日"]::after { 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/></svg>'); 
+}
+
+/* 节日卡片特殊样式 */
+.festival-card {
+    border-left: 4px solid #f43f5e;
+    position: relative;
+    overflow: hidden;
+}
+
+.festival-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background-color: #f43f5e;
+    transform: rotate(45deg) translate(15px, -15px);
+    z-index: 1;
+}
