@@ -40,6 +40,14 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+        .popup-menu {
+            animation: fadeIn 0.2s ease-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
@@ -262,8 +270,73 @@
                                 event.stopPropagation();
                                 const countdownId = this.dataset.id;
                                 console.log(`显示倒数日[${countdownId}]的更多选项`);
-                                // 这里可以实现显示更多选项的功能
-                                alert('更多功能即将上线!');
+                                
+                                // 创建弹出菜单
+                                const popupMenu = document.createElement('div');
+                                popupMenu.className = 'popup-menu glass-effect absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50';
+                                popupMenu.style.top = '40px';
+                                
+                                // 添加菜单选项
+                                popupMenu.innerHTML = `
+                                    <div class="py-1">
+                                        <button class="delete-option w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center">
+                                            <img src="./icons/trash-2.svg" class="w-4 h-4 mr-2 icon-with-fallback" alt="删除">
+                                            删除事件
+                                        </button>
+                                        <button class="reserve-option w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+                                            <img src="./icons/calendar.svg" class="w-4 h-4 mr-2 icon-with-fallback" alt="预留">
+                                            预留选项
+                                        </button>
+                                    </div>
+                                `;
+                                
+                                // 检查是否已存在弹出菜单，如果存在则移除
+                                const existingMenu = document.querySelector('.popup-menu');
+                                if (existingMenu) {
+                                    existingMenu.remove();
+                                }
+                                
+                                // 将弹出菜单添加到按钮的父元素
+                                this.parentNode.style.position = 'relative';
+                                this.parentNode.appendChild(popupMenu);
+                                
+                                // 为删除选项添加点击事件
+                                const deleteOption = popupMenu.querySelector('.delete-option');
+                                deleteOption.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    
+                                    // 确认删除
+                                    if (confirm('确定要删除这个倒数日吗？')) {
+                                        // 调用删除函数
+                                        if (deleteCountdown(countdownId)) {
+                                            // 重新加载倒数日列表
+                                            loadCountdowns();
+                                            // 显示成功消息
+                                            showMessage('倒数日已删除', 'success');
+                                        } else {
+                                            showMessage('删除失败，请重试', 'error');
+                                        }
+                                    }
+                                    
+                                    // 移除弹出菜单
+                                    popupMenu.remove();
+                                });
+                                
+                                // 为预留选项添加点击事件
+                                const reserveOption = popupMenu.querySelector('.reserve-option');
+                                reserveOption.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    alert('此功能即将上线!');
+                                    popupMenu.remove();
+                                });
+                                
+                                // 点击页面其他地方关闭弹出菜单
+                                document.addEventListener('click', function closeMenu(e) {
+                                    if (!popupMenu.contains(e.target) && e.target !== moreButton) {
+                                        popupMenu.remove();
+                                        document.removeEventListener('click', closeMenu);
+                                    }
+                                });
                             });
                         }
                         
