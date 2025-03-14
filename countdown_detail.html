@@ -70,7 +70,7 @@
                 <!-- 顶部导航栏 -->
                 <div class="glass-effect rounded-xl p-4 flex justify-between items-center mb-4">
                     <div class="flex items-center">
-                        <button class="p-2 mr-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200">
+                        <button class="p-2 mr-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200" id="back-button" onclick="window.location.href='index.html'">
                             <img src="./icons/arrow-left.svg" class="w-5 h-5 icon-with-fallback" alt="返回">
                         </button>
                         <h1 class="text-xl font-bold text-indigo-900">倒数日详情</h1>
@@ -164,7 +164,7 @@
                 
                 <!-- 底部导航栏 -->
                 <div class="glass-effect rounded-xl p-3 mt-4 flex justify-around items-center">
-                    <button class="flex flex-col items-center p-2 text-gray-500 hover:text-indigo-600">
+                    <button class="flex flex-col items-center p-2 text-gray-500 hover:text-indigo-600" id="home-button" onclick="window.location.href='index.html'">
                         <img src="./icons/home.svg" class="w-6 h-6 icon-with-fallback" alt="首页">
                         <span class="text-xs mt-1">首页</span>
                     </button>
@@ -193,10 +193,99 @@
 <script src="languages.js"></script>
 <script src="language-switcher.js"></script>
 <script src="icon-fallback.js"></script>
+<script src="navigation.js"></script>
 <script>
     // 页面加载完成后初始化语言功能
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('倒数日详情页面: DOM加载完成，初始化功能');
         initLanguage();
+        
+        // 添加直接的事件处理程序，作为备选方案
+        const backButton = document.getElementById('back-button');
+        if (backButton) {
+            console.log('倒数日详情页面: 找到返回按钮，添加直接点击事件');
+            backButton.addEventListener('click', function(event) {
+                console.log('倒数日详情页面: 返回按钮被直接点击');
+                window.location.href = 'index.html';
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        } else {
+            console.error('倒数日详情页面: 未找到ID为back-button的返回按钮');
+            // 尝试使用更宽松的选择器
+            const altBackButton = document.querySelector('button.mr-2.rounded-full');
+            if (altBackButton) {
+                console.log('倒数日详情页面: 使用备用选择器找到返回按钮，添加点击事件');
+                altBackButton.addEventListener('click', function(event) {
+                    console.log('倒数日详情页面: 备用返回按钮被点击');
+                    window.location.href = 'index.html';
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+            }
+        }
+        
+        const homeButton = document.getElementById('home-button');
+        if (homeButton) {
+            console.log('倒数日详情页面: 找到首页按钮，添加直接点击事件');
+            homeButton.addEventListener('click', function(event) {
+                console.log('倒数日详情页面: 首页按钮被直接点击');
+                window.location.href = 'index.html';
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        } else {
+            console.error('倒数日详情页面: 未找到ID为home-button的首页按钮');
+        }
+        
+        // 检查navigation.js是否已加载
+        console.log('倒数日详情页面: 检查导航脚本是否已加载');
+        const scripts = document.querySelectorAll('script');
+        let navigationLoaded = false;
+        
+        scripts.forEach(script => {
+            if (script.src.includes('navigation.js')) {
+                navigationLoaded = true;
+                console.log('倒数日详情页面: navigation.js已加载');
+            }
+        });
+        
+        if (!navigationLoaded) {
+            console.error('倒数日详情页面: navigation.js未加载，可能导致导航功能失效');
+        }
+        
+        // 检查底部导航按钮
+        const bottomNavButtons = document.querySelectorAll('.glass-effect.rounded-xl.p-3.mt-4 button');
+        console.log(`倒数日详情页面: 找到${bottomNavButtons.length}个底部导航按钮`);
+        
+        // 为底部导航按钮添加额外的点击事件监听器（作为备份）
+        bottomNavButtons.forEach((button, index) => {
+            console.log(`倒数日详情页面: 为底部导航按钮[${index}]添加备份点击事件`);
+            button.addEventListener('click', function(event) {
+                const imgElement = this.querySelector('img');
+                if (imgElement) {
+                    const imgAlt = imgElement.alt;
+                    console.log(`倒数日详情页面: 底部导航按钮[${index}]被点击，alt属性: "${imgAlt}"`);
+                    
+                    if (imgAlt === '首页' || imgAlt.includes('home')) {
+                        console.log('倒数日详情页面: 首页按钮被点击，跳转到index.html');
+                        window.location.href = 'index.html';
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                }
+            });
+        });
+    });
+    
+    // 确保所有脚本加载完成
+    window.addEventListener('load', function() {
+        console.log('倒数日详情页面: 页面完全加载完成，确保所有功能初始化');
+        if (typeof initLanguage === 'function') {
+            initLanguage();
+        } else {
+            console.error('倒数日详情页面: initLanguage函数未定义，请检查language-switcher.js是否正确加载');
+        }
     });
 </script>
 </html>

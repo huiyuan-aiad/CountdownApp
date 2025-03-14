@@ -5,6 +5,41 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Navigation.js: DOM加载完成，初始化导航功能');
+    
+    // 特别处理返回按钮 - 使用更具体的选择器
+    const backButton = document.querySelector('button.mr-2.rounded-full img[alt="返回"], button.mr-2.rounded-full img[alt="back"]');
+    if (backButton) {
+        const parentButton = backButton.closest('button');
+        console.log('Navigation.js: 找到返回按钮，添加点击事件监听器');
+        
+        // 无论按钮是否有ID，都添加事件监听器
+        parentButton.addEventListener('click', function(event) {
+            console.log('Navigation.js: 返回按钮被点击，跳转到index.html');
+            window.location.href = 'index.html';
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    } else {
+        console.log('Navigation.js: 未找到返回按钮');
+    }
+    
+    // 特别处理底部导航栏的首页按钮
+    const homeButton = document.querySelector('button img[alt="首页"], button img[alt="home"]');
+    if (homeButton) {
+        const parentButton = homeButton.closest('button');
+        console.log('Navigation.js: 找到首页按钮，添加点击事件监听器');
+        
+        // 无论按钮是否有ID，都添加事件监听器
+        parentButton.addEventListener('click', function(event) {
+            console.log('Navigation.js: 首页按钮被点击，跳转到index.html');
+            window.location.href = 'index.html';
+            event.preventDefault();
+            event.stopPropagation();
+        });
+    } else {
+        console.log('Navigation.js: 未找到首页按钮');
+    }
+    
     // 获取所有导航按钮
     const navButtons = document.querySelectorAll('button');
     console.log(`Navigation.js: 找到${navButtons.length}个按钮`);
