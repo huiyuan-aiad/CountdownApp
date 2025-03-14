@@ -91,7 +91,7 @@
                     <!-- 分类选择 -->
                     <div class="glass-effect rounded-xl p-4">
                         <label class="block text-sm font-medium text-gray-700 mb-3">分类</label>
-                        <div class="flex flex-wrap gap-2">
+                        <div class="flex flex-wrap gap-2" id="category-container">
                             <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
                                 学习
                             </button>
@@ -105,8 +105,16 @@
                                 节日
                             </button>
                             <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
-                                <img src="./icons/plus.svg" class="w-4 h-4 inline mr-1 icon-with-fallback" alt="添加">
-                                自定义
+                                自定义1
+                            </button>
+                            <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
+                                自定义2
+                            </button>
+                            <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
+                                自定义3
+                            </button>
+                            <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
+                                自定义4
                             </button>
                         </div>
                     </div>
@@ -114,7 +122,7 @@
                     <!-- 颜色选择 -->
                     <div class="glass-effect rounded-xl p-4">
                         <label class="block text-sm font-medium text-gray-700 mb-3">颜色</label>
-                        <div class="flex space-x-3">
+                        <div class="flex space-x-3" id="color-container">
                             <button class="w-8 h-8 rounded-full bg-indigo-500 ring-2 ring-offset-2 ring-indigo-500"></button>
                             <button class="w-8 h-8 rounded-full bg-pink-500"></button>
                             <button class="w-8 h-8 rounded-full bg-purple-500"></button>
@@ -180,6 +188,7 @@
 <script src="icon-fallback.js"></script>
 <script src="navigation.js"></script>
 <script src="countdown-storage.js"></script>
+<script src="category-colors.js"></script>
 <script src="debug.js"></script>
 <script>
     // 初始化分类选择功能
@@ -203,27 +212,70 @@
                 this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
                 this.classList.add('bg-indigo-600', 'text-white');
                 
-                console.log(`选择了分类: ${this.textContent.trim()}`);
+                // 获取选中的分类名称
+                const categoryName = this.textContent.trim();
+                console.log(`选择了分类: ${categoryName}`);
+                
+                // 根据分类自动选择对应的固定颜色
+                updateSelectedColorByCategory(categoryName);
             });
         });
     }
     
+    // 根据分类更新选中的颜色
+    function updateSelectedColorByCategory(categoryName) {
+        // 获取该分类对应的固定颜色
+        const categoryColor = getCategoryColor(categoryName);
+        console.log(`分类"${categoryName}"对应的固定颜色: ${categoryColor}`);
+        
+        // 找到对应的颜色按钮并选中它
+        const colorButtons = document.querySelectorAll('#color-container .rounded-full');
+        
+        // 先移除所有颜色按钮的选中状态
+        colorButtons.forEach(button => {
+            button.classList.remove('ring-2', 'ring-offset-2');
+            // 移除所有ring-{color}类
+            for (let i = 0; i < button.classList.length; i++) {
+                if (button.classList[i].startsWith('ring-') && 
+                    button.classList[i] !== 'ring-2' && 
+                    button.classList[i] !== 'ring-offset-2') {
+                    button.classList.remove(button.classList[i]);
+                    i--; // 调整索引，因为移除了一个元素
+                }
+            }
+        });
+        
+        // 找到对应颜色的按钮并选中它
+        const targetColorClass = 'bg-' + categoryColor;
+        let found = false;
+        
+        colorButtons.forEach(button => {
+            for (let i = 0; i < button.classList.length; i++) {
+                if (button.classList[i] === targetColorClass) {
+                    // 为找到的颜色按钮添加选中状态
+                    button.classList.add('ring-2', 'ring-offset-2');
+                    const ringClass = 'ring-' + categoryColor;
+                    button.classList.add(ringClass);
+                    found = true;
+                    console.log(`已选中颜色按钮: ${targetColorClass}`);
+                    break;
+                }
+            }
+        });
+        
+        if (!found) {
+            console.warn(`未找到对应颜色按钮: ${targetColorClass}`);
+        }
+    }
+    
     // 初始化颜色选择功能
     function initColorSelection() {
-        const colorButtons = document.querySelectorAll('.glass-effect.rounded-xl.p-4:nth-of-type(4) .rounded-full');
+        const colorButtons = document.querySelectorAll('#color-container .rounded-full');
         console.log(`找到${colorButtons.length}个颜色选项`);
         
-        // 确保每个颜色按钮都有正确的初始颜色
-        const colorClasses = [
-            'bg-indigo-500',
-            'bg-pink-500',
-            'bg-purple-500',
-            'bg-blue-500',
-            'bg-green-500',
-            'bg-yellow-500',
-            'bg-red-500',
-            'bg-gray-500'
-        ];
+        // 使用category-colors.js中定义的永久映射颜色，确保按固定顺序排列
+        const categoryColors = getOrderedCategoryColors();
+        console.log('获取到有序类别颜色映射:', categoryColors);
         
         // 重置所有颜色按钮的类
         colorButtons.forEach((button, index) => {
@@ -231,21 +283,43 @@
             button.className = 'w-8 h-8 rounded-full';
             
             // 添加对应的颜色类
-            if (index < colorClasses.length) {
-                button.classList.add(colorClasses[index]);
+            if (index < categoryColors.length) {
+                button.classList.add('bg-' + categoryColors[index]);
             }
         });
         
-        // 默认选中第一个颜色
-        if (colorButtons.length > 0) {
-            const firstButton = colorButtons[0];
-            firstButton.classList.add('ring-2', 'ring-offset-2');
-            
-            // 添加对应的ring-{color}类
-            const colorClass = colorClasses[0];
-            if (colorClass) {
-                const ringClass = 'ring-' + colorClass.substring(3); // 将bg-xxx转换为ring-xxx
-                firstButton.classList.add(ringClass);
+        // 获取当前选中的分类
+        const activeCategory = document.querySelector('.category-chip.active');
+        if (activeCategory) {
+            const categoryName = activeCategory.textContent.trim();
+            console.log(`页面加载时默认选中的分类: ${categoryName}`);
+            // 立即更新颜色选择器状态
+            updateSelectedColorByCategory(categoryName);
+        } else {
+            // 如果没有选中的分类，默认选中第一个分类
+            const firstCategory = document.querySelector('.category-chip');
+            if (firstCategory) {
+                const categoryName = firstCategory.textContent.trim();
+                console.log(`没有默认选中的分类，选择第一个分类: ${categoryName}`);
+                // 将第一个分类设为选中状态
+                firstCategory.classList.add('active');
+                firstCategory.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
+                firstCategory.classList.add('bg-indigo-600', 'text-white');
+                // 更新颜色选择器状态
+                updateSelectedColorByCategory(categoryName);
+            } else {
+                // 默认选中第一个颜色
+                if (colorButtons.length > 0) {
+                    const firstButton = colorButtons[0];
+                    firstButton.classList.add('ring-2', 'ring-offset-2');
+                    
+                    // 添加对应的ring-{color}类
+                    const colorClass = firstButton.classList.value.match(/bg-[\w-]+/);
+                    if (colorClass) {
+                        const ringClass = 'ring-' + colorClass[0].substring(3); // 将bg-xxx转换为ring-xxx
+                        firstButton.classList.add(ringClass);
+                    }
+                }
             }
         }
         
@@ -394,19 +468,9 @@
             category = activeCategory.textContent.trim();
         }
         
-        // 获取选中的颜色
-        let color = 'indigo-600';
-        const activeColor = document.querySelector('.rounded-full.ring-2');
-        if (activeColor) {
-            // 从类名中提取颜色
-            const classList = activeColor.classList;
-            for (let i = 0; i < classList.length; i++) {
-                if (classList[i].startsWith('bg-') && classList[i] !== 'bg-white' && classList[i] !== 'bg-gray-100') {
-                    color = classList[i].replace('bg-', '');
-                    break;
-                }
-            }
-        }
+        // 根据分类获取对应的固定颜色
+        let color = getCategoryColor(category);
+        console.log(`根据分类"${category}"获取到固定颜色: ${color}`);
         
         // 获取提醒设置
         const reminderEnabled = document.querySelector('input[type="checkbox"]').checked;
