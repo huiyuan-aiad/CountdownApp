@@ -211,110 +211,145 @@
                                 <img src="./icons/calendar.svg" class="w-10 h-10 text-gray-400 icon-with-fallback" alt="日历">
                             </div>
                             <h3 class="text-lg font-medium text-gray-700 mb-2">暂无倒数日</h3>
-                            <p class="text-gray-500 mb-4">点击底部的
+                            <p class="text-gray-500 mb-4">点击底部的添加按钮创建新的倒数日</p>
                         </div>
                     `;
-                    
-                    // 添加到页面
-                    document.body.appendChild(shareDialog);
-                    
-                    // 关闭按钮
-                    shareDialog.querySelector('.close-btn').addEventListener('click', function() {
-                        document.body.removeChild(shareDialog);
-                    });
-                    
-                    // 复制按钮
-                    shareDialog.querySelector('.copy-btn').addEventListener('click', function() {
-                        // 复制文本到剪贴板
-                        navigator.clipboard.writeText(shareText)
-                            .then(() => {
-                                showMessage('复制成功', 'success');
-                            })
-                            .catch(err => {
-                                console.error('复制失败:', err);
-                                showMessage('复制失败，请手动复制', 'error');
+                } else {
+                    // 渲染倒数日列表
+                    countdowns.forEach(countdown => {
+                        // 计算剩余天数
+                        const daysRemaining = calculateDaysRemaining(countdown.date);
+                        
+                        // 确定颜色类
+                        const colorClass = countdown.color || 'indigo-600';
+                        const bgColorClass = `from-${colorClass.replace('600', '400')} to-${colorClass.replace('600', '500')}`;
+                        
+                        // 创建倒数日卡片
+                        const cardElement = document.createElement('div');
+                        cardElement.className = 'countdown-card glass-effect rounded-xl p-4 relative overflow-hidden';
+                        cardElement.dataset.id = countdown.id;
+                        cardElement.dataset.category = countdown.category;
+                        
+                        // 设置卡片内容
+                        cardElement.innerHTML = `
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${bgColorClass} rounded-bl-3xl opacity-20"></div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-gray-800">${countdown.title}</h3>
+                                <span class="px-2 py-1 bg-${colorClass.replace('600', '100')} text-${colorClass} rounded-lg text-xs font-medium">${countdown.category}</span>
+                            </div>
+                            <div class="flex items-center space-x-1 text-gray-500 text-sm mb-3">
+                                <img src="./icons/calendar.svg" class="w-4 h-4 icon-with-fallback" alt="日期">
+                                <span>${formatDate(countdown.date)}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-600 text-sm">距离还有</p>
+                                    <p class="text-3xl font-bold text-${colorClass}">${daysRemaining}天</p>
+                                </div>
+                                <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200" data-id="${countdown.id}">
+                                    <img src="./icons/more-horizontal.svg" class="w-5 h-5 text-gray-600 icon-with-fallback" alt="更多">
+                                </button>
+                            </div>
+                        `;
+                        
+                        // 添加到容器
+                        countdownContainer.appendChild(cardElement);
+                        
+                        // 为更多按钮添加点击事件
+                        const moreButton = cardElement.querySelector('button[data-id]');
+                        if (moreButton) {
+                            moreButton.addEventListener('click', function(event) {
+                                event.stopPropagation();
+                                const countdownId = this.dataset.id;
+                                console.log(`显示倒数日[${countdownId}]的更多选项`);
+                                // 这里可以实现显示更多选项的功能
+                                alert('更多功能即将上线!');
                             });
-                    });
-                    
-                    // 微信分享按钮
-                    shareDialog.querySelector('.wechat-btn').addEventListener('click', function() {
-                        showMessage('请在微信中打开本页面进行分享', 'info');
-                    });
-                    
-                    // Twitter分享按钮
-                    shareDialog.querySelector('.twitter-btn').addEventListener('click', function() {
-                        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-                        window.open(twitterUrl, '_blank');
-                    });
-                }
-                
-                // 初始化分类筛选功能
-                function initCategoryFilter() {
-                    const categoryButtons = document.querySelectorAll('.flex.space-x-2.mb-4 button');
-                    console.log(`找到${categoryButtons.length}个分类筛选按钮`);
-                    
-                    categoryButtons.forEach(button => {
-                        button.addEventListener('click', function() {
-                            // 移除所有按钮的active类
-                            categoryButtons.forEach(btn => {
-                                btn.classList.remove('bg-indigo-600', 'text-white');
-                                btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-                            });
-                            
-                            // 为当前点击的按钮添加active类
-                            this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-                            this.classList.add('bg-indigo-600', 'text-white');
-                            
-                            // 获取分类名称
-                            const category = this.textContent.trim();
-                            console.log(`筛选分类: ${category}`);
-                            
-                            // 筛选倒数日
-                            filterCountdowns(category);
-                        });
-                    });
-                }
-                
-                // 筛选倒数日
-                function filterCountdowns(category) {
-                    if (category === '全部') {
-                        // 显示所有倒数日
-                        const cards = document.querySelectorAll('.countdown-card');
-                        cards.forEach(card => {
-                            card.style.display = 'block';
-                        });
-                        return;
-                    }
-                    
-                    // 筛选指定分类的倒数日
-                    const cards = document.querySelectorAll('.countdown-card');
-                    cards.forEach(card => {
-                        if (card.dataset.category === category) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
                         }
+                        
+                        // 为卡片添加点击事件，跳转到详情页
+                        cardElement.addEventListener('click', function() {
+                            const countdownId = this.dataset.id;
+                            console.log(`查看倒数日[${countdownId}]的详情`);
+                            window.location.href = `countdown_detail.html?id=${countdownId}`;
+                        });
                     });
                 }
                 
-                // 显示消息
-                function showMessage(message, type) {
-                    // 创建消息元素
-                    const messageElement = document.createElement('div');
-                    messageElement.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg z-50 ${type === 'success' ? 'bg-green-500' : type === 'info' ? 'bg-blue-500' : 'bg-red-500'} text-white font-medium shadow-lg`;
-                    messageElement.textContent = message;
+                return true;
+            } catch (error) {
+                console.error('加载倒数日数据失败:', error);
+                return false;
+            }
+        }
+        
+        // 初始化分类筛选功能
+        function initCategoryFilter() {
+            const categoryButtons = document.querySelectorAll('.flex.space-x-2.mb-4 button');
+            console.log(`找到${categoryButtons.length}个分类筛选按钮`);
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    categoryButtons.forEach(btn => {
+                        btn.classList.remove('bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
+                    });
                     
-                    // 添加到页面
-                    document.body.appendChild(messageElement);
+                    // 为当前点击的按钮添加active类
+                    this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
+                    this.classList.add('bg-indigo-600', 'text-white');
                     
-                    // 设置自动消失
-                    setTimeout(() => {
-                        messageElement.classList.add('opacity-0', 'transition-opacity', 'duration-500');
-                        setTimeout(() => {
-                            document.body.removeChild(messageElement);
-                        }, 500);
-                    }, 3000);
+                    // 获取分类名称
+                    const category = this.textContent.trim();
+                    console.log(`筛选分类: ${category}`);
+                    
+                    // 筛选倒数日
+                    filterCountdowns(category);
+                });
+            });
+        }
+        
+        // 筛选倒数日
+        function filterCountdowns(category) {
+            if (category === '全部') {
+                // 显示所有倒数日
+                const cards = document.querySelectorAll('.countdown-card');
+                cards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                return;
+            }
+            
+            // 筛选指定分类的倒数日
+            const cards = document.querySelectorAll('.countdown-card');
+            cards.forEach(card => {
+                if (card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
                 }
-            </script>
-            </body>
-            </html>
+            });
+        }
+        
+        // 显示消息
+        function showMessage(message, type) {
+            // 创建消息元素
+            const messageElement = document.createElement('div');
+            messageElement.className = `fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg z-50 ${type === 'success' ? 'bg-green-500' : type === 'info' ? 'bg-blue-500' : 'bg-red-500'} text-white font-medium shadow-lg`;
+            messageElement.textContent = message;
+            
+            // 添加到页面
+            document.body.appendChild(messageElement);
+            
+            // 设置自动消失
+            setTimeout(() => {
+                messageElement.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+                setTimeout(() => {
+                    document.body.removeChild(messageElement);
+                }, 500);
+            }, 3000);
+        }
+    </script>
+    </body>
+    </html>

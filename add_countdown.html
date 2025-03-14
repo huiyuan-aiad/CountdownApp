@@ -210,27 +210,81 @@
     
     // 初始化颜色选择功能
     function initColorSelection() {
-        const colorButtons = document.querySelectorAll('.glass-effect.rounded-xl.p-4 .rounded-full');
+        const colorButtons = document.querySelectorAll('.glass-effect.rounded-xl.p-4:nth-of-type(4) .rounded-full');
         console.log(`找到${colorButtons.length}个颜色选项`);
         
+        // 确保每个颜色按钮都有正确的初始颜色
+        const colorClasses = [
+            'bg-indigo-500',
+            'bg-pink-500',
+            'bg-purple-500',
+            'bg-blue-500',
+            'bg-green-500',
+            'bg-yellow-500',
+            'bg-red-500',
+            'bg-gray-500'
+        ];
+        
+        // 重置所有颜色按钮的类
+        colorButtons.forEach((button, index) => {
+            // 移除所有bg-颜色类
+            button.className = 'w-8 h-8 rounded-full';
+            
+            // 添加对应的颜色类
+            if (index < colorClasses.length) {
+                button.classList.add(colorClasses[index]);
+            }
+        });
+        
+        // 默认选中第一个颜色
+        if (colorButtons.length > 0) {
+            const firstButton = colorButtons[0];
+            firstButton.classList.add('ring-2', 'ring-offset-2');
+            
+            // 添加对应的ring-{color}类
+            const colorClass = colorClasses[0];
+            if (colorClass) {
+                const ringClass = 'ring-' + colorClass.substring(3); // 将bg-xxx转换为ring-xxx
+                firstButton.classList.add(ringClass);
+            }
+        }
+        
+        // 为每个颜色按钮添加点击事件
         colorButtons.forEach(button => {
             button.addEventListener('click', function() {
                 // 移除所有颜色的选中状态
                 colorButtons.forEach(b => {
                     b.classList.remove('ring-2', 'ring-offset-2');
+                    // 移除所有ring-{color}类
+                    for (let i = 0; i < b.classList.length; i++) {
+                        if (b.classList[i].startsWith('ring-') && 
+                            b.classList[i] !== 'ring-2' && 
+                            b.classList[i] !== 'ring-offset-2') {
+                            b.classList.remove(b.classList[i]);
+                            i--; // 调整索引，因为移除了一个元素
+                        }
+                    }
                 });
-                
-                // 为当前点击的颜色添加选中状态
-                this.classList.add('ring-2', 'ring-offset-2');
                 
                 // 获取颜色类名
                 const classList = this.classList;
                 let colorClass = '';
                 for (let i = 0; i < classList.length; i++) {
-                    if (classList[i].startsWith('bg-') && classList[i] !== 'bg-white' && classList[i] !== 'bg-gray-100') {
+                    if (classList[i].startsWith('bg-') && 
+                        classList[i] !== 'bg-white' && 
+                        classList[i] !== 'bg-gray-100') {
                         colorClass = classList[i];
                         break;
                     }
+                }
+                
+                // 为当前点击的颜色添加选中状态
+                this.classList.add('ring-2', 'ring-offset-2');
+                
+                // 添加对应的ring-{color}类
+                if (colorClass) {
+                    const ringClass = 'ring-' + colorClass.substring(3); // 将bg-xxx转换为ring-xxx
+                    this.classList.add(ringClass);
                 }
                 
                 console.log(`选择了颜色: ${colorClass}`);
@@ -309,12 +363,18 @@
     
     // 初始化保存按钮功能
     function initSaveButton() {
-        const saveButton = document.querySelector('.glass-effect button.bg-indigo-600');
+        const saveButton = document.querySelector('.glass-effect.rounded-xl.p-4.flex.justify-between button.bg-indigo-600');
         if (saveButton) {
             console.log('找到保存按钮，添加点击事件');
             saveButton.addEventListener('click', handleSaveCountdown);
         } else {
             console.error('未找到保存按钮');
+            // 尝试使用更宽松的选择器
+            const altSaveButton = document.querySelector('button.bg-indigo-600');
+            if (altSaveButton) {
+                console.log('使用备用选择器找到保存按钮，添加点击事件');
+                altSaveButton.addEventListener('click', handleSaveCountdown);
+            }
         }
     }
     
@@ -335,7 +395,7 @@
         }
         
         // 获取选中的颜色
-        let color = 'indigo-500';
+        let color = 'indigo-600';
         const activeColor = document.querySelector('.rounded-full.ring-2');
         if (activeColor) {
             // 从类名中提取颜色
@@ -361,6 +421,8 @@
             reminder: reminderEnabled
         };
         
+        console.log('准备保存的倒数日数据:', countdown);
+        
         // 验证数据
         const validation = validateCountdown(countdown);
         
@@ -371,6 +433,13 @@
         }
         
         try {
+            // 检查countdown-storage.js是否已加载
+            if (typeof addCountdown !== 'function') {
+                console.error('addCountdown函数未定义，请检查countdown-storage.js是否正确加载');
+                showErrorMessage('保存失败，系统错误');
+                return;
+            }
+            
             // 保存倒数日
             const savedCountdown = addCountdown(countdown);
             console.log('倒数日保存成功:', savedCountdown);

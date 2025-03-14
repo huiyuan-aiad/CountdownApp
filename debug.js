@@ -122,14 +122,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // 处理分类标签按钮
             if (this.classList.contains('rounded-full') && !this.querySelector('img')) {
                 console.log('触发分类标签切换');
-                // 移除所有分类按钮的active类
-                const categoryButtons = document.querySelectorAll('.rounded-full');
-                categoryButtons.forEach(btn => {
-                    if (!btn.querySelector('img')) {
-                        btn.classList.remove('bg-indigo-600', 'text-white');
-                        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-                    }
-                });
+                // 只选择分类区域内的按钮，避免影响颜色选择器
+                const categorySection = document.querySelector('.glass-effect.rounded-xl.p-4:nth-of-type(3)');
+                if (categorySection) {
+                    const categoryButtons = categorySection.querySelectorAll('.rounded-full');
+                    categoryButtons.forEach(btn => {
+                        if (!btn.querySelector('img')) {
+                            btn.classList.remove('bg-indigo-600', 'text-white');
+                            btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
+                        }
+                    });
+                }
                 
                 // 为当前点击的按钮添加active类
                 this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
