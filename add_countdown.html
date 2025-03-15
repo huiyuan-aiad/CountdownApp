@@ -98,7 +98,7 @@
                             <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
                                 工作
                             </button>
-                            <button class="category-chip active px-4 py-2 rounded-full font-medium text-sm whitespace-nowrap">
+                            <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
                                 生活
                             </button>
                             <button class="category-chip px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 font-medium text-sm whitespace-nowrap hover:border-indigo-300">
@@ -123,14 +123,14 @@
                     <div class="glass-effect rounded-xl p-4">
                         <label class="block text-sm font-medium text-gray-700 mb-3">颜色</label>
                         <div class="flex space-x-3" id="color-container">
-                            <button id="color-button-0" class="w-8 h-8 rounded-full bg-indigo-500" data-color="indigo-500"></button>
-                            <button id="color-button-1" class="w-8 h-8 rounded-full bg-pink-500" data-color="pink-500"></button>
-                            <button id="color-button-2" class="w-8 h-8 rounded-full bg-purple-500" data-color="purple-500"></button>
-                            <button id="color-button-3" class="w-8 h-8 rounded-full bg-blue-500" data-color="blue-500"></button>
-                            <button id="color-button-4" class="w-8 h-8 rounded-full bg-green-500" data-color="green-500"></button>
-                            <button id="color-button-5" class="w-8 h-8 rounded-full bg-yellow-500" data-color="yellow-500"></button>
-                            <button id="color-button-6" class="w-8 h-8 rounded-full bg-red-500" data-color="red-500"></button>
-                            <button id="color-button-7" class="w-8 h-8 rounded-full bg-gray-500" data-color="gray-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-indigo-500" data-color="indigo-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-pink-500" data-color="pink-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-purple-500" data-color="purple-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-blue-500" data-color="blue-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-green-500" data-color="green-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-yellow-500" data-color="yellow-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-red-500" data-color="red-500"></button>
+                            <button class="w-8 h-8 rounded-full bg-gray-500" data-color="gray-500"></button>
                         </div>
                     </div>
                     
@@ -389,6 +389,28 @@
             }
         });
         
+        // 确保所有颜色按钮都有正确的背景色
+        setTimeout(() => {
+            colorButtons.forEach((button, index) => {
+                let hasBgColor = false;
+                for (let i = 0; i < button.classList.length; i++) {
+                    if (button.classList[i].startsWith('bg-') && 
+                        button.classList[i] !== 'bg-white' && 
+                        button.classList[i] !== 'bg-gray-100') {
+                        hasBgColor = true;
+                        break;
+                    }
+                }
+                
+                if (!hasBgColor && index < categoryColors.length) {
+                    const colorClass = 'bg-' + categoryColors[index];
+                    button.classList.add(colorClass);
+                    button.setAttribute('data-color', categoryColors[index]);
+                    console.log(`修复颜色按钮[${index}]的背景色为: ${colorClass}`);
+                }
+            });
+        }, 100);
+        
         // 获取当前选中的分类
         const activeCategory = document.querySelector('.category-chip.active');
         if (activeCategory) {
@@ -423,48 +445,6 @@
                 }
             }
         }
-        
-        // 为每个颜色按钮添加点击事件
-        colorButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // 移除所有颜色的选中状态
-                colorButtons.forEach(b => {
-                    b.classList.remove('ring-2', 'ring-offset-2');
-                    // 移除所有ring-{color}类
-                    for (let i = 0; i < b.classList.length; i++) {
-                        if (b.classList[i].startsWith('ring-') && 
-                            b.classList[i] !== 'ring-2' && 
-                            b.classList[i] !== 'ring-offset-2') {
-                            b.classList.remove(b.classList[i]);
-                            i--; // 调整索引，因为移除了一个元素
-                        }
-                    }
-                });
-                
-                // 获取颜色类名
-                const classList = this.classList;
-                let colorClass = '';
-                for (let i = 0; i < classList.length; i++) {
-                    if (classList[i].startsWith('bg-') && 
-                        classList[i] !== 'bg-white' && 
-                        classList[i] !== 'bg-gray-100') {
-                        colorClass = classList[i];
-                        break;
-                    }
-                }
-                
-                // 为当前点击的颜色添加选中状态
-                this.classList.add('ring-2', 'ring-offset-2');
-                
-                // 添加对应的ring-{color}类
-                if (colorClass) {
-                    const ringClass = 'ring-' + colorClass.substring(3); // 将bg-xxx转换为ring-xxx
-                    this.classList.add(ringClass);
-                }
-                
-                console.log(`选择了颜色: ${colorClass}`);
-            });
-        });
     }
     
     // 页面加载完成后初始化语言功能和导航功能
