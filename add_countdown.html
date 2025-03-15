@@ -627,12 +627,11 @@
         // 获取提醒设置
         const reminderEnabled = document.querySelector('input[type="checkbox"]').checked;
         
-        // 创建倒数日对象
+        // 创建倒数日对象 - 不再设置color属性，让首页根据category动态获取颜色
         const countdown = {
             title: title,
             date: dateInput,
             category: category,
-            color: color,
             notes: notes,
             reminder: reminderEnabled
         };

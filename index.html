@@ -81,10 +81,10 @@
                 <div class="flex-1 overflow-y-auto space-y-4 pr-1">
                     <!-- 卡片1 - 毕业典礼 -->
                     <div class="countdown-card glass-effect rounded-xl p-4 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-pink-400 to-purple-500 rounded-bl-3xl opacity-20"></div>
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-bl-3xl opacity-20"></div>
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="text-lg font-bold text-gray-800">毕业典礼</h3>
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded-lg text-xs font-medium">学习</span>
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-500 rounded-lg text-xs font-medium">学习</span>
                         </div>
                         <div class="flex items-center space-x-1 text-gray-500 text-sm mb-3">
                             <img src="./icons/calendar.svg" class="w-4 h-4 icon-with-fallback" alt="日期">
@@ -93,7 +93,7 @@
                         <div class="flex justify-between items-center">
                             <div>
                                 <p class="text-gray-600 text-sm">距离还有</p>
-                                <p class="text-3xl font-bold text-indigo-600">125天</p>
+                                <p class="text-3xl font-bold text-indigo-500">125天</p>
                             </div>
                             <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200">
                                 <img src="./icons/more-horizontal.svg" class="w-5 h-5 text-gray-600 icon-with-fallback" alt="更多">
@@ -229,9 +229,15 @@
                         // 计算剩余天数
                         const daysRemaining = calculateDaysRemaining(countdown.date);
                         
-                        // 确定颜色类
-                        const colorClass = countdown.color || 'indigo-600';
-                        const bgColorClass = `from-${colorClass.replace('600', '400')} to-${colorClass.replace('600', '500')}`;
+                        // 根据类别获取对应的颜色
+                        const categoryColor = getCategoryColor(countdown.category);
+                        
+                        // 提取颜色基础部分（例如从'indigo-500'提取'indigo'）
+                        const colorBase = categoryColor.split('-')[0];
+                        const colorIntensity = categoryColor.split('-')[1];
+                        
+                        // 创建背景渐变颜色类
+                        const bgColorClass = `from-${colorBase}-400 to-${colorBase}-${colorIntensity}`;
                         
                         // 创建倒数日卡片
                         const cardElement = document.createElement('div');
@@ -244,7 +250,7 @@
                             <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${bgColorClass} rounded-bl-3xl opacity-20"></div>
                             <div class="flex justify-between items-start mb-2">
                                 <h3 class="text-lg font-bold text-gray-800">${countdown.title}</h3>
-                                <span class="px-2 py-1 bg-${colorClass.replace('600', '100')} text-${colorClass} rounded-lg text-xs font-medium">${countdown.category}</span>
+                                <span class="px-2 py-1 bg-${colorBase}-100 text-${colorBase}-${colorIntensity} rounded-lg text-xs font-medium">${countdown.category}</span>
                             </div>
                             <div class="flex items-center space-x-1 text-gray-500 text-sm mb-3">
                                 <img src="./icons/calendar.svg" class="w-4 h-4 icon-with-fallback" alt="日期">
@@ -253,7 +259,7 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <p class="text-gray-600 text-sm">距离还有</p>
-                                    <p class="text-3xl font-bold text-${colorClass}">${daysRemaining}天</p>
+                                    <p class="text-3xl font-bold text-${colorBase}-${colorIntensity}">${daysRemaining}天</p>
                                 </div>
                                 <button class="p-2 rounded-full bg-gray-100 hover:bg-gray-200" data-id="${countdown.id}">
                                     <img src="./icons/more-horizontal.svg" class="w-5 h-5 text-gray-600 icon-with-fallback" alt="更多">
