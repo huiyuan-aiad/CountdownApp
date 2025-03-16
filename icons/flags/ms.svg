@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <rect width="900" height="42.85" fill="#cc0001"/>
+  <rect width="900" height="42.85" y="85.7" fill="#cc0001"/>
+  <rect width="900" height="42.85" y="171.4" fill="#cc0001"/>
+  <rect width="900" height="42.85" y="257.1" fill="#cc0001"/>
+  <rect width="900" height="42.85" y="342.8" fill="#cc0001"/>
+  <rect width="900" height="42.85" y="428.5" fill="#cc0001"/>
+  <rect width="900" height="42.85" y="514.2" fill="#cc0001"/>
+  <rect width="450" height="300" fill="#010066"/>
+  <circle cx="225" cy="150" r="75" fill="#ffcc00"/>
+  <polygon points="225,75 240,125 295,125 250,155 265,205 225,175 185,205 200,155 155,125 210,125" fill="#ffcc00"/>
+</svg>

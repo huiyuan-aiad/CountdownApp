@@ -119,15 +119,29 @@ function createLanguageSelector() {
             langOption.classList.add('bg-indigo-100', 'text-indigo-700');
         };
         
+        // 创建左侧包含国旗和语言名称的容器
+        const leftContainer = document.createElement('div');
+        leftContainer.className = 'flex items-center';
+        
+        // 添加国旗图标
+        const flagIcon = document.createElement('img');
+        flagIcon.src = `./icons/flags/${langCode}.svg`;
+        flagIcon.className = 'w-5 h-5 mr-2 icon-with-fallback';
+        flagIcon.alt = langName;
+        
         const langNameSpan = document.createElement('span');
         langNameSpan.textContent = langName;
+        
+        // 将国旗和语言名称添加到左侧容器
+        leftContainer.appendChild(flagIcon);
+        leftContainer.appendChild(langNameSpan);
         
         const checkIcon = document.createElement('img');
         checkIcon.src = './icons/check.svg';
         checkIcon.className = `w-5 h-5 icon-with-fallback ${getCurrentLanguage() === langCode ? '' : 'hidden'}`;
         checkIcon.alt = 'Selected';
         
-        langOption.appendChild(langNameSpan);
+        langOption.appendChild(leftContainer);
         langOption.appendChild(checkIcon);
         langList.appendChild(langOption);
     }

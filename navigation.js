@@ -115,8 +115,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 处理设置按钮
                 if (imgAlt === '设置' || imgAlt.includes('settings')) {
-                    // 实现设置功能
-                    showSettingsInterface();
+                    // 实现设置功能 - 调用language-switcher.js中的showSettingsMenu函数
+                    function showSettingsInterface() {
+                        console.log('调用设置菜单');
+                        if (typeof showSettingsMenu === 'function') {
+                            // 创建一个模拟的事件对象
+                            const mockEvent = {
+                                preventDefault: function() {},
+                                stopPropagation: function() {}
+                            };
+                            // 调用showSettingsMenu函数
+                            showSettingsMenu(mockEvent);
+                        } else {
+                            console.error('showSettingsMenu函数未定义');
+                        }
+                    }
                     return;
                 }
                 
