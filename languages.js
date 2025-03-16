@@ -374,7 +374,6 @@ const languages = {
         'select_language': 'اختر اللغة',
         'language': 'اللغة'
     },
-    
     // 土耳其语
     'tr': {
         // 通用
@@ -484,3 +483,4 @@ const languages = {
         'select_language': 'Pilih Bahasa',
         'language': 'Bahasa'
     }
+}

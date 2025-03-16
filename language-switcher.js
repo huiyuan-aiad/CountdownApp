@@ -381,8 +381,6 @@ function showFeatureComingSoon(featureName) {
     document.body.appendChild(container);
 }
 
-}
-
 // 初始化语言功能
 function initLanguage() {
     // 确保languages对象已加载
