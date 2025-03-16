@@ -257,465 +257,61 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return calendarHTML;
     }
-    
-    /* 原始提醒列表功能 - 暂时注释掉，存在语法错误
-    function showRemindersList() {
-        // 创建提醒列表视图
-        const remindersView = document.createElement('div');
-        remindersView.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-        remindersView.innerHTML = `
-            <div class="bg-white rounded-xl p-4 w-11/12 max-w-md max-h-[80vh] overflow-y-auto">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold">我的提醒</h2>
-                    <button class="close-btn p-2 rounded-full hover:bg-gray-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                </div>
-                <div class="reminders-list space-y-3">
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">毕业典礼</h3>
-                                <p class="text-sm text-gray-500">提前3天提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>
-    */
+
     
     // 实现提醒列表功能 - 占位函数
     function showRemindersList() {
         console.log('提醒功能尚未实现，这是一个占位函数');
         alert('提醒功能正在开发中，敬请期待！');
     }
-    /*
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="p-1 text-gray-500 hover:text-indigo-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                </button>
-                                <button class="p-1 text-gray-500 hover:text-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>
-    */
+    
+    // 实现个人中心功能 - 占位函数
+    function showUserProfile() {
+        console.log('个人中心功能尚未实现，这是一个占位函数');
+        alert('个人中心功能正在开发中，敬请期待！');
+    }
+    
+    // 实现搜索功能 - 占位函数
+    function showSearchInterface() {
+        console.log('搜索功能尚未实现，这是一个占位函数');
+        alert('搜索功能正在开发中，敬请期待！');
+    }
+    
+    // 实现设置功能 - 占位函数
+    function showSettingsInterface() {
+        console.log('设置功能尚未实现，这是一个占位函数');
+        alert('设置功能正在开发中，敬请期待！');
+    }
+    
+    // 实现编辑倒数日功能 - 占位函数
+    function editCurrentCountdown() {
+        console.log('编辑倒数日功能尚未实现，这是一个占位函数');
+        window.location.href = 'add_countdown.html';
+    }
+    
+    // 实现更多选项功能 - 占位函数
+    function showMoreOptions(button) {
+        console.log('更多选项功能尚未实现，这是一个占位函数');
+        alert('更多选项功能正在开发中，敬请期待！');
+    }
+    
+    // 实现过滤倒数日列表功能 - 占位函数
+    function filterCountdownsByCategory(category) {
+        console.log(`过滤倒数日列表功能尚未实现，选择的分类: ${category}`);
+        // 这里应该实现根据分类过滤倒数日列表的逻辑
+    }
+    
+    // 实现保存倒数日功能 - 占位函数
+    function saveCountdown() {
+        console.log('保存倒数日功能尚未实现，这是一个占位函数');
+        alert('倒数日已保存！');
+        window.location.href = 'index.html';
+    }
+    
+    // 实现分享倒数日功能 - 占位函数
+    function shareCountdown() {
+        console.log('分享倒数日功能尚未实现，这是一个占位函数');
+        alert('分享功能正在开发中，敬请期待！');
+    }
+
 })
