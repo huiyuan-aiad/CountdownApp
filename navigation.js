@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return calendarHTML;
     }
     
-    // 实现提醒列表功能
+    /* 原始提醒列表功能 - 暂时注释掉，存在语法错误
     function showRemindersList() {
         // 创建提醒列表视图
         const remindersView = document.createElement('div');
@@ -292,7 +292,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="font-medium">春节</h3>
-                                <p class="text-sm text-gray-500">提前1周提醒</p>-500">提前1周提醒</p>
+                                <p class="text-sm text-gray-500">提前1周提醒</p>
+    */
+    
+    // 实现提醒列表功能 - 占位函数
+    function showRemindersList() {
+        console.log('提醒功能尚未实现，这是一个占位函数');
+        alert('提醒功能正在开发中，敬请期待！');
+    }
+    /*
                             </div>
                             <div class="flex space-x-2">
                                 <button class="p-1 text-gray-500 hover:text-indigo-600">
@@ -709,3 +717,5 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div>
                                 <h3 class="font-medium">春节</h3>
                                 <p class="text-sm text-gray-500">提前1周提醒</p>
+    */
+})
